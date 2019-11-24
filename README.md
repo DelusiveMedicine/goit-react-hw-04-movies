@@ -1,2 +1,1 @@
-# goit-react-hw-04-movies
-GOIT React Homework #4
+https://delusivemedicine.github.io/goit-react-hw-04-movies/
