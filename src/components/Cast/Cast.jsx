@@ -5,9 +5,8 @@ class Cast extends Component {
   state = { cast: [] };
   IMG = 'https://image.tmdb.org/t/p/w500';
   componentDidMount = () => {
-    const { type } = this.props.location.state;
     const { movieId } = this.props.match.params;
-    fetchMovieCast(movieId, type).then(({ data }) =>
+    fetchMovieCast(movieId).then(({ data }) =>
       this.setState({ cast: data.cast }),
     );
   };

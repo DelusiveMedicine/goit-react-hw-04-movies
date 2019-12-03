@@ -15,18 +15,20 @@ class HomePage extends Component {
       <Fragment>
         <h1>Trending today</h1>
         <ul>
-          {trending.map(el => (
-            <li key={el.id}>
-              <Link
-                to={{
-                  pathname: `/movies/${el.id}`,
-                  state: { type: el.media_type },
-                }}
-              >
-                {el.title || el.name}
-              </Link>
-            </li>
-          ))}
+          {trending.map(el =>
+            el.media_type === 'movie' ? (
+              <li key={el.id}>
+                <Link
+                  to={{
+                    pathname: `/movies/${el.id}`,
+                    state: { from: this.props.location },
+                  }}
+                >
+                  {el.title}
+                </Link>
+              </li>
+            ) : null,
+          )}
         </ul>
       </Fragment>
     );
