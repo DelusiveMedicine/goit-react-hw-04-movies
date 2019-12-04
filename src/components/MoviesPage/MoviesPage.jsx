@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { fetchMovies } from '../../API';
+import { fetchMovies } from '../helpers/API';
+import SearchBar from './styles';
 
 class MoviesPage extends Component {
   state = { movies: [], query: '' };
@@ -44,7 +45,7 @@ class MoviesPage extends Component {
     return (
       <Fragment>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={this.handleChange} />
+          <SearchBar type="text" onChange={this.handleChange} />
           <button type="submit">Search</button>
         </form>
         <ul>

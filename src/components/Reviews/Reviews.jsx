@@ -1,21 +1,13 @@
-import React, { Component } from 'react';
-import { fetchMovieReviews } from '../../API';
+import React from 'react';
+import { fetchMovieReviews } from '../helpers/API';
+import ClassComponent from '../../decorators/ClassComponent';
 
-class Reviews extends Component {
-  state = { reviews: [] };
-  IMG = 'https://image.tmdb.org/t/p/w500';
-  componentDidMount = () => {
-    const { movieId } = this.props.match.params;
-    fetchMovieReviews(movieId).then(({ data }) =>
-      this.setState({ reviews: data.results }),
-    );
-  };
-  render() {
-    const { reviews } = this.state;
+const Reviews = ({ data }) => {
+  if (data) {
     return (
       <ul>
-        {reviews.length > 0 ? (
-          reviews.map(el => (
+        {data.results.length > 0 ? (
+          data.results.map(el => (
             <li key={el.id}>
               <b>Author: {el.author}</b>
               <p>{el.content}</p>
@@ -27,6 +19,7 @@ class Reviews extends Component {
       </ul>
     );
   }
-}
+  return null;
+};
 
-export default Reviews;
+export default ClassComponent(Reviews, { fetchData: fetchMovieReviews });

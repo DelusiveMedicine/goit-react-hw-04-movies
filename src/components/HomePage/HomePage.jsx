@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchTrending } from '../../API';
+import { fetchTrending } from '../helpers/API';
 
 class HomePage extends Component {
   state = { trending: [] };

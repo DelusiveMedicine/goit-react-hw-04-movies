@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
-import { fetchMovieCast } from '../../API';
+import React from 'react';
+import { fetchMovieCast } from '../helpers/API';
+import ClassComponent from '../../decorators/ClassComponent';
+import { CastList, Photo } from './styles';
 
-class Cast extends Component {
-  state = { cast: [] };
-  IMG = 'https://image.tmdb.org/t/p/w500';
-  componentDidMount = () => {
-    const { movieId } = this.props.match.params;
-    fetchMovieCast(movieId).then(({ data }) =>
-      this.setState({ cast: data.cast }),
-    );
-  };
-  render() {
-    const { cast } = this.state;
-    return cast.map(el => (
-      <ul key={el.cast_id}>
+const Cast = ({ data }) => {
+  const IMG = 'https://image.tmdb.org/t/p/w500';
+  if (data)
+    return data.cast.map(el => (
+      <CastList key={el.cast_id}>
         <li>
-          <img width="100" src={this.IMG + el.profile_path} alt={el.name} />
+          <Photo src={IMG + el.profile_path} alt={el.name} />
         </li>
         <li>{el.name}</li>
         <li>Character: {el.character}</li>
-      </ul>
+      </CastList>
     ));
-  }
-}
+  return null;
+};
 
-export default Cast;
+export default ClassComponent(Cast, { fetchData: fetchMovieCast });
